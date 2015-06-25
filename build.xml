@@ -344,7 +344,7 @@
     <get src="http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/${junit.hamcrest}" dest="${build.libdir}/${junit.hamcrest}"/>
     -->
     <get src="https://repo1.maven.org/maven2/junit/junit/4.12/${junit.jarname}" dest="${build.libdir}/${junit.jarname}"/>
-    <get src="http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/${junit.hamcrest}" dest="${build.libdir}/${junit.hamcrest}"/>
+    <get src="https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/${junit.hamcrest}" dest="${build.libdir}/${junit.hamcrest}"/>
   </target>
   
   <!-- Target: jacoco
