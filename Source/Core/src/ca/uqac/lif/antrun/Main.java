@@ -17,6 +17,9 @@
 *************************************************************************/
 package ca.uqac.lif.antrun;
 
+import ca.uqac.lif.antrun.dep.jar.*;
+import ca.uqac.lif.antrun.dep.zip.*;
+
 /**
  * A simple main class used to test the build file
  */
@@ -30,6 +33,8 @@ public class Main
   {
     // Use another class to ensure the compilation worked
     MyClass mc = new MyClass();
+    MyJarDependency mjd = new MyJarDependency();
+    MyZipDependency mzd = new MyZipDependency();
     System.out.println("This is the main class successfully executing!");
     System.exit(0);
   }

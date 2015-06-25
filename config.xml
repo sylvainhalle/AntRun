@@ -44,8 +44,8 @@
       <name>Test Dep</name>
       <classname>ca.uqac.lif.NonExistentClass</classname>
       <files>
-        <jar>http://sylvainhalle.github.io/AntRun/placeholders/dummy.jar</jar>
-        <zip>http://sylvainhalle.github.io/AntRun/placeholders/dummy.zip</zip>
+        <jar>http://sylvainhalle.github.io/AntRun/placeholders/dummy-jar.jar</jar>
+        <zip>http://sylvainhalle.github.io/AntRun/placeholders/dummy-zip.zip</zip>
       </files>
     </dependency>
   </dependencies>

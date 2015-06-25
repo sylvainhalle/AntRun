@@ -70,6 +70,12 @@
   <!-- Target jar file -->
   <property name="build.jar.filename" value="AntRun.jar"/>
   
+  <!-- Generate a jar with the documentation -->
+  <property name="build.jar.withdoc" value="true"/>
+  
+  <!-- Generate a jar with the sources -->
+  <property name="build.jar.withsrc" value="true"/>
+  
   <!-- Target: initialization
        All other targets should ultimately
        depend on this one (except perhaps very simple ones such as
@@ -171,8 +177,12 @@
 	      <attribute name="Class-Path" value="."/>
 	  </manifest>
 	  <fileset dir="${build.bindir}"/>
-	  <fileset dir="${build.srcdir}"/>
-	  <fileset dir="${build.docdir}"/>
+	  <fileset dir="${build.srcdir}">
+	    <include name="*" if="${build.jar.withsrc}"/>
+	  </fileset>
+	  <fileset dir="${build.docdir}">
+	    <include name="*" if="${build.jar.withdoc}"/>
+	  </fileset>
       </jar>
   </target>
   
@@ -392,7 +402,7 @@
                     <get src="@{url}" dest="${build.libdir}"/>
                     <var name="basename" unset="true"/>
                     <basename property="basename" file="@{url}"/>
-		    <unzip src="@{downloaddir}/@{basename}" dest="@{outdir}">
+		    <unzip src="@{downloaddir}/${basename}" dest="@{outdir}">
 		      <patternset>
 			<include name="**/*.jar"/>
 		      </patternset>

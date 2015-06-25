@@ -1,6 +1,8 @@
 AntRun: a general-purpose Ant build script
 ==========================================
 
+[![Build Status](https://semaphoreci.com/api/v1/projects/5eab613c-29af-43c0-8961-0170588f6368/466366/badge.svg)](https://semaphoreci.com/sylvainhalle/antrun)
+
 AntRun is a template structure for Java projects. Through its comprehensive
 Ant build script, it supports automated execution of unit tests, generation
 of [Javadoc](http://www.oracle.com/technetwork/articles/java/index-jsp-135444.html)
