@@ -365,21 +365,16 @@
     </unzip>
   </target>
   
-  <!-- Macro: handle-deps
+  <!-- Task: download-deps
        Loops through all dependencies specified in config.xml; checks if
        the target class name exists in the classpath; if not, downloads the
-       files specified in the <files> section to @{downloaddir}. In the case of
+       files specified in the <files> section to ${build.depdir}. In the case of
        a zip, unzips all jar files found in the archive and copies them to
-       @{outdir}. Depending on what you specify for @{outdir}, will either
-       leave the downloaded files in some local folder, or install them to
-       Java's extension folder.
+       ${build.depdir}.
   -->
-  <macrodef name="handle-deps">
-    <attribute name="downloaddir"/>
-    <attribute name="outdir"/>
+  <task name="download-deps">
     <sequential>
-    <mkdir dir="@{downloaddir}"/>
-    <mkdir dir="@{outdir}"/>
+    <mkdir dir="${build.depdir}"/>
     <xmltask source="config.xml">
       <call path="/build/dependencies/dependency">
         <param name="depname" path="name/text()"/>
@@ -397,7 +392,7 @@
                 <call path="/build/dependencies/dependency[name='@{depname}']/files/jar">
                   <param name="url" path="text()"/>
                   <actions>
-                    <get src="@{url}" dest="@{outdir}"/>
+                    <get src="@{url}" dest="${build.depdir}"/>
                   </actions>
                 </call>
                 <call path="/build/dependencies/dependency[name='@{depname}']/files/zip">
@@ -406,7 +401,7 @@
                     <get src="@{url}" dest="${build.libdir}"/>
                     <var name="basename" unset="true"/>
                     <basename property="basename" file="@{url}"/>
-		    <unzip src="@{downloaddir}/${basename}" dest="@{outdir}">
+		    <unzip src="@{build.depdir}/${basename}" dest="${build.depdir}">
 		      <patternset>
 			<include name="**/*.jar"/>
 		      </patternset>
@@ -421,7 +416,18 @@
       </call>
     </xmltask>
     </sequential>
-  </macrodef>
+  </task>
+  
+  <!-- Task: install-deps
+       Copies whatever was fetched by the download-deps task into the
+       system's extension folder. This task should probably be run as
+       administrator to work.
+  -->
+  <task name="install-deps" depends="init">
+    <copy todir="${build.extdir}" includeemptydirs="false">
+      <fileset dir="${build.depdir}" includes="*.jar" />
+    </copy>
+  </task>
   
 </project>
 <!-- :tabWidth=2: -->
