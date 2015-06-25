@@ -44,6 +44,9 @@
   <!-- The folder where the compiled files should go -->
   <property name="build.bindir" value="Source/Core/bin"/>
   
+  <!-- The folder where the downloaded dependencies (if any) should go -->
+  <property name="build.depdir" value="deps"/>
+  
   <!-- The folder with the project's test source files -->
   <property name="build.test.srcdir" value="Source/CoreTest/src"/>
   
@@ -241,20 +244,15 @@
     <fail if="test.failed"/>
   </target>
   
-  <!-- Target: download-deps
-       Download dependencies specified in config.xml, if required
-  -->
-  <target name="download-deps" depends="init" description="Download unsatisfied JAR dependencies">
-    <handle-deps downloaddir="${build.libdir}" outdir="${build.libdir}" />
-  </target>
-  
   <!-- Target: install-deps
-       Download dependencies specified in config.xml, if required, and
-       copies them to the Jave extension folder. This may require
-       administrator privileges (for the copying part)
+       Copies whatever was fetched by the download-deps task into the
+       system's extension folder. This task should probably be run as
+       administrator to work.
   -->
-  <target name="install-deps" depends="init" description="Download and install unsatisfied JAR dependencies">
-    <handle-deps downloaddir="${build.libdir}" outdir="${build.extdir}" />
+  <target name="install-deps" depends="init">
+    <copy todir="${build.extdir}" includeemptydirs="false">
+      <fileset dir="${build.depdir}" includes="*.jar" />
+    </copy>
   </target>
   
   <!-- Target: clean
@@ -262,8 +260,9 @@
   -->
   <target name="clean" description="Clean the project">
     <delete>
-      <fileset dir="." includes="**/*.bak"/>
-      <fileset dir="." includes="**/*~"/>
+      <fileset dir="." includes="**/*">
+        <filename name="*.xml~"/>
+      </fileset>
     </delete>
     <delete dir="${build.libdir}"/>
     <delete dir="${build.bindir}"/>
@@ -372,7 +371,7 @@
        a zip, unzips all jar files found in the archive and copies them to
        ${build.depdir}.
   -->
-  <task name="download-deps">
+  <target name="download-deps" depends="init">
     <sequential>
     <mkdir dir="${build.depdir}"/>
     <xmltask source="config.xml">
@@ -398,10 +397,10 @@
                 <call path="/build/dependencies/dependency[name='@{depname}']/files/zip">
                   <param name="url" path="text()"/>
                   <actions>
-                    <get src="@{url}" dest="${build.libdir}"/>
+                    <get src="@{url}" dest="${build.depdir}"/>
                     <var name="basename" unset="true"/>
                     <basename property="basename" file="@{url}"/>
-		    <unzip src="@{build.depdir}/${basename}" dest="${build.depdir}">
+		    <unzip src="${build.depdir}/${basename}" dest="${build.depdir}">
 		      <patternset>
 			<include name="**/*.jar"/>
 		      </patternset>
@@ -416,18 +415,7 @@
       </call>
     </xmltask>
     </sequential>
-  </task>
-  
-  <!-- Task: install-deps
-       Copies whatever was fetched by the download-deps task into the
-       system's extension folder. This task should probably be run as
-       administrator to work.
-  -->
-  <task name="install-deps" depends="init">
-    <copy todir="${build.extdir}" includeemptydirs="false">
-      <fileset dir="${build.depdir}" includes="*.jar" />
-    </copy>
-  </task>
+  </target>
   
 </project>
 <!-- :tabWidth=2: -->
