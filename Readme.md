@@ -12,10 +12,15 @@ of JAR dependencies as specified in an external, user-definable XML file.
 It also includes a boilerplate `.gitignore` file suitable for an Eclipse
 project.
 
+All this is done in a platform-independent way, so your build scripts
+should work on both MacOS, Linux and Windows.
+
 Table of Contents                                                    {#toc}
 -----------------
 
 - [Quick start guide](#quickstart)
+- [Available tasks](#tasks)
+- [Continuous integration](#ci)
 - [About the author](#about)
 
 Quick start guide                                             {#quickstart}
@@ -47,17 +52,22 @@ Quick start guide                                             {#quickstart}
 5. Use Ant to build your project. To compile the code, generate the
    Javadoc, run the unit tests, generate a test and code coverage report
    and bundle everything in a runnable JAR file, simply type `ant` (without
-   any arguments) on the command line. If dependencies were specified in
-   step 4 and are not present in the system, they will be downloaded and
-   automatically installed. Otherwise, use one of the many [tasks](#tasks)
-   that are predefined.
+   any arguments) on the command line.
+   
+6. If dependencies were specified in step 4 and are not present in the
+   system, type `ant download-deps`, followed by `ant install-deps` to
+   automatically download and install them before compiling. The latter
+   command might require to be run as administrator --the way to do this
+   varies according to your operating system (see below).
+
+Otherwise, use one of the many [tasks](#tasks) that are predefined.
 
 Available tasks                                                    {#tasks}
 ---------------
 
 This document is incomplete. Execute
 
-   $ ant -p
+    $ ant -p
 
 from the project's top folder to get the list of all available targets.
 
@@ -84,6 +94,27 @@ Performs tests with jUnit and generates code coverage report with JaCoCo.
 The unit test report (in HTML format) is available in the `test/junit`
 folder (which will be created if it does not exist). The code coverage
 report is available in the `test/coverage` folder.
+
+Continuous integration                                               {#ci}
+----------------------
+
+AntRun makes it easy to use [continuous
+integration](https://en.wikipedia.org/wiki/Continuous_integration) services
+like [Travis CI](https://travis-ci.org) or
+[Semaphore](http://semaphoreapp.com). The sequence of commands to
+automatically setup the environment, build and test it is (for Linux):
+
+    $ ant download-deps
+    $ sudo ant install-deps
+    $ ant dist test
+
+The second command must be run as administrator, as it copies the required
+dependencies into a system folder that generally requires that access. For
+Windows systems, running as administrator is done with the
+[`runas` command](https://technet.microsoft.com/en-us/library/cc771525.aspx#BKMK_examples).
+
+Notice how, apart from the call to `sudo`, all the process is
+platform-independent.
 
 About the author                                                   {#about}
 ----------------
