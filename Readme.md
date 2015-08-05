@@ -21,6 +21,7 @@ Table of Contents                                                    {#toc}
 - [Quick start guide](#quickstart)
 - [Available tasks](#tasks)
 - [Continuous integration](#ci)
+- [Cross-compiling](#xcompile)
 - [About the author](#about)
 
 Quick start guide                                             {#quickstart}
@@ -115,6 +116,23 @@ Windows systems, running as administrator is done with the
 
 Notice how, apart from the call to `sudo`, all the process is
 platform-independent.
+
+Cross-compiling                                                 {#xcompile}
+---------------
+
+By default, AntRun compiles your project using the default JDK installed on
+your computer. However, you can compile files that are compatible with
+Java **6** and upwards by defining the environment variable
+`JAVA6_BOOTCLASSES`. This variable should contain the location of all the basic
+classes of version 6 of the JDK. You can automatically define the contents of
+this variable through a script; for example using Bash:
+
+> export JAVA5_BOOTCLASSES=""
+> for i in /usr/lib/jvm/java/jre/lib/*.jar; do 
+>     export JAVA5_BOOTCLASSES=$JAVA5_BOOTCLASSES:$i
+> done
+
+Replace `/usr/lib...` by the location of the JDK on your system.
 
 About the author                                                   {#about}
 ----------------
