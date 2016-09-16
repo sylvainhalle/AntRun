@@ -23,7 +23,7 @@
   xmlns:jacoco="antlib:org.jacoco.ant">
   
   <!-- The build script's version number. Do not edit! -->
-  <property name="antrun.version" value="1.1.4"/>
+  <property name="antrun.version" value="1.1.5"/>
   
   <!-- Load project properties from XML file -->
   <xmlproperty file="config.xml"/>
@@ -198,6 +198,13 @@
       <doctitle><![CDATA[<h1>]]>${build.name}<![CDATA[ Documentation</h1>]]></doctitle>
       <bottom><![CDATA[<i>Copyright&nbsp;&#169; ]]>${build.author}<![CDATA[. All Rights Reserved.</i>]]></bottom>
       <link href="http://docs.oracle.com/javase/6/docs/api/"/>
+      <classpath>
+        <pathelement location="${build.bindir}"/>
+        <pathelement location="${build.depdir}"/>
+        <pathelement path="${java.class.path}"/>
+        <pathelement location="${build.libdir}/${junit.jarname}"/>
+        <pathelement location="${build.libdir}/${junit.hamcrest}"/>
+      </classpath>
     </javadoc>
   </target>
   
