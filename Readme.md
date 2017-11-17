@@ -30,8 +30,8 @@ Quick start guide                                             {#quickstart}
 1. First make sure you have the following installed:
 
   - The Java Development Kit (JDK) to compile. AntRun was developed and
-    tested on version 7 of the JDK, but it is probably safe to use any
-    later version.
+    tested on version 6 and 7 of the JDK, but it is probably safe to use
+    any later version.
   - [Ant](http://ant.apache.org) to automate the compilation and build
     process
 
@@ -87,7 +87,8 @@ Compiles the unit tests.
 ### jar
 
 Compiles the project, generates the Javadoc and creates a runnable JAR,
-including the sources and the documentation.
+including the sources and the documentation (and possibly the project's
+dependencies, see `download-deps` below).
 
 ### test
 
@@ -95,6 +96,20 @@ Performs tests with jUnit and generates code coverage report with JaCoCo.
 The unit test report (in HTML format) is available in the `test/junit`
 folder (which will be created if it does not exist). The code coverage
 report is available in the `test/coverage` folder.
+
+### download-deps
+
+Downloads all the JAR dependencies declared in `config.xml`, and required
+to correctly build the project. The JAR files are extracted and placed in
+the `dep` folder. When compiling (with the `compile` task), the compiler
+is instructed to include these JARs in its classpath. Depending on the
+setting specified in `config.xml`, these JARs are also bundled in the
+output JAR file of the `jar` task.
+
+### download-rt6
+
+Downloads the bootstrap classpath (`rt.jar`) for Java 6, and places it in
+the project's root folder. See [cross-compiling]{#xcompile}.
 
 Continuous integration                                               {#ci}
 ----------------------
@@ -120,19 +135,44 @@ platform-independent.
 Cross-compiling                                                 {#xcompile}
 ---------------
 
+The `.class` files are marked with the major version number of the compiler
+that created them; hence a file compiled with JDK 1.7 will contain this
+version number in its metadata. A JRE 1.6 will refuse to run them,
+regardless of whether they were built from 1.6-compliant code.
+*Cross-compiling* is necessary if one wants to make a project compatible
+with a version of Java earlier than the one used to compile it. 
+
 By default, AntRun compiles your project using the default JDK installed on
 your computer. However, you can compile files that are compatible with
-Java **6** and upwards by defining the environment variable
-`JAVA6_BOOTCLASSES`. This variable should contain the location of all the basic
-classes of version 6 of the JDK. You can automatically define the contents of
-this variable through a script; for example using Bash:
+a specific version of Java by putting the *bootstrap* JAR file `rt.jar`
+that corresponds to that version in the project's root folder (i.e. in the
+same folder as `build.xml`). When started, AntRun checks for the presence
+bootstrap JAR; if present, it uses it instead of the system's bootstrap
+classpath.
 
-> export JAVA5_BOOTCLASSES=""
-> for i in /usr/lib/jvm/java/jre/lib/*.jar; do 
->     export JAVA5_BOOTCLASSES=$JAVA5_BOOTCLASSES:$i
-> done
+For example, if one downloads the `rt.jar` file from JDK 1.6 (using
+the `download-rt6` task), the compiled files will be able to be run by
+a Java 6 virtual machine. (Assuming the code itself is Java 6-compliant.)
 
-Replace `/usr/lib...` by the location of the JDK on your system.
+Projects that use AntRun                                        {#projects}
+------------------------
+
+Virtually every Java project developed at [LIF](http://liflab.ca) uses
+an AntRun template project. This includes:
+
+- [Azrael](https://github.com/sylvainhalle/Azrael), a generic serialization
+  library
+- [BeepBeep 3](https://liflab.github.io/beepbeep-3), an event stream
+  processing engine, and most of its
+  [palettes](https://github.com/liflab/beepbeep-3-palettes)
+- [Bullwinkle](https://github.com/sylvainhalle/Bullwinkle), a runtime BNF
+  parser
+- [Jerrydog](https://github.com/sylvainhalle/Jerrydog), a lightweight web
+  server
+- [LabPal](https://liflab.github.io/labpal), a framework for running
+  computer experiments
+
+...and more.
 
 About the author                                                   {#about}
 ----------------
