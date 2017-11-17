@@ -23,7 +23,7 @@
   xmlns:jacoco="antlib:org.jacoco.ant">
   
   <!-- The build script's version number. Do not edit! -->
-  <property name="antrun.version" value="1.1.6"/>
+  <property name="antrun.version" value="1.2"/>
   
   <!-- Load project properties from XML file -->
   <xmlproperty file="config.xml"/>
@@ -401,6 +401,14 @@
     <mkdir dir="${build.libdir}"/>
     <get src="http://sylvainhalle.github.io/AntRun/dependencies/xmltask.jar" dest="${build.libdir}/${xmltask.jarname}"/>
   </target>
+
+  <!-- Target: download-rt6
+       Download boot classpath for Java 1.6 and put it in the root folder
+  -->
+  <target name="download-rt6">
+    <get src="http://sylvainhalle.github.io/AntRun/dependencies/1.6.0_45/rt.jar" dest="."/>
+  </target>
+
   
   <!-- Target: junit
        Download jUnit JARs if not present, and puts them in the lib folder
