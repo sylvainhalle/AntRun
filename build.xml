@@ -443,7 +443,7 @@
   </condition>
   <target name="jacoco" if="${jacoco.absent}" description="Install JaCoCo if not present">
     <mkdir dir="${build.libdir}"/>
-    <get src="http://search.maven.org/remotecontent?filepath=org/jacoco/jacoco/0.7.5.201505241946/jacoco-0.7.5.201505241946.zip" dest="${build.libdir}/jacoco.zip"/>
+    <get src="http://search.maven.org/remotecontent?filepath=org/jacoco/jacoco/0.8.1/jacoco-0.8.1.zip" dest="${build.libdir}/jacoco.zip"/>
     <unzip src="${build.libdir}/jacoco.zip" dest="${build.libdir}">
       <patternset>
         <include name="**/*.jar"/>
