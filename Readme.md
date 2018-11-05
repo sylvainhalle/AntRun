@@ -171,6 +171,8 @@ an AntRun template project. This includes:
   server
 - [LabPal](https://liflab.github.io/labpal), a framework for running
   computer experiments
+- [TeXtidote](https://github.com/sylvainhalle/textidote), a spelling and
+  grammar checker for LaTeX documents
 
 ...and more.
 
@@ -178,5 +180,5 @@ About the author                                                   {#about}
 ----------------
 
 AntRun was written by [Sylvain Hallé](http://leduotang.ca/sylvain),
-associate professor at [Université du Québec à
+Full Professor at [Université du Québec à
 Chicoutimi](http://www.uqac.ca/), Canada.
