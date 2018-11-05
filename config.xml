@@ -32,6 +32,11 @@
   <!-- The project's main class -->
   <!-- <mainclass>my.package.MainClass</mainclass> -->
   
+  <test>
+    <!-- The filename pattern to recognize test files -->
+    <!-- <filenamepattern>**/*Test.java</filenamepattern> -->
+  </test>
+  
   <!--
     Write JAR dependencies here.
   -->
