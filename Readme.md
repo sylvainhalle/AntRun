@@ -101,15 +101,15 @@ report is available in the `test/coverage` folder.
 
 Downloads all the JAR dependencies declared in `config.xml`, and required
 to correctly build the project. The JAR files are extracted and placed in
-the `dep` folder. When compiling (with the `compile` task), the compiler
-is instructed to include these JARs in its classpath. Depending on the
+the `dep` or the `lib` folder. When compiling (with the `compile` task), the
+compiler is instructed to include these JARs in its classpath. Depending on the
 setting specified in `config.xml`, these JARs are also bundled in the
 output JAR file of the `jar` task.
 
 ### download-rt6
 
 Downloads the bootstrap classpath (`rt.jar`) for Java 6, and places it in
-the project's root folder. See [cross-compiling]{#xcompile}.
+the project's root folder. See [cross-compiling](#xcompile).
 
 Continuous integration                                               {#ci}
 ----------------------
@@ -121,7 +121,6 @@ like [Travis CI](https://travis-ci.org) or
 automatically setup the environment, build and test it is (for Linux):
 
     $ ant download-deps
-    $ sudo ant install-deps
     $ ant dist test
 
 The second command must be run as administrator, as it copies the required
@@ -131,6 +130,43 @@ Windows systems, running as administrator is done with the
 
 Notice how, apart from the call to `sudo`, all the process is
 platform-independent.
+
+Declaring dependencies                                              {#deps}
+----------------------
+
+Among other configuration settings, dependencies can be declared in the file
+`config.xml`. Locate the `<dependencies>` section in that file, and add as
+many `<dependency>` entries as required. The structure of such a section is as
+follows:
+
+``` xml
+<dependency>
+      <name>Test Dep</name>
+      <classname>ca.uqac.lif.NonExistentClass</classname>
+      <files>
+        <jar>http://sylvainhalle.github.io/AntRun/placeholders/dummy-jar.jar</jar>
+        <zip>http://sylvainhalle.github.io/AntRun/placeholders/dummy-zip.zip</zip>
+      </files>
+      <bundle>true</bundle>
+</dependency>
+```
+
+The parameters are:
+
+- `name`: a human-readable name for the dependency, only used for display
+- `classname`: a fully qualified class name that is supposed to be provided
+  by the dependency. AntRun checks if this class name is present in the
+  classpath; if not, it will download the files specified in the `files`
+  section
+- `files`: a list of either `jar` or `zip` elements, each containing a URL to
+  a JAR file, or an archive of JAR files. AntRun downloads these files and
+  places them in either the `dep` or the `lib` folders of the project (both are
+  in the classpath). If the URL is a zip, it also unzips the content of the
+  archive.
+- `bundle`: when this element has the value `true`, the dependency is copied
+  to the `dep` folder; otherwise, it is copied to the `lib` folder. As was
+  said, both are in the classpath, but only the JARs in the `dep` folder are
+  bundled when creating a JAR file for the project (using the `jar` task).
 
 Cross-compiling                                                 {#xcompile}
 ---------------
