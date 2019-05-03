@@ -23,7 +23,7 @@
   xmlns:jacoco="antlib:org.jacoco.ant">
   
   <!-- The build script's version number. Do not edit! -->
-  <property name="antrun.version" value="1.4.3"/>
+  <property name="antrun.version" value="1.5"/>
   
   <!-- Load project properties from XML file -->
   <xmlproperty file="config.xml"/>
@@ -548,6 +548,20 @@
 		              </patternset>
 		              <mapper type="flatten"/>
 		            </unzip>
+                  </actions>
+                </call>
+                <call path="/build/dependencies/dependency[name='@{depname}']/files/tgz">
+                  <param name="url" path="text()"/>
+                  <actions>
+                    <get src="@{url}" dest="${depdest}"/>
+                    <var name="basename" unset="true"/>
+                    <basename property="basename" file="@{url}"/>
+		            <untar src="${depdest}/${basename}" dest="${depdest}" compression="gzip">
+		              <patternset>
+                        <include name="**/*.jar"/>
+		              </patternset>
+		              <mapper type="flatten"/>
+		            </untar>
                   </actions>
                 </call>
               </xmltask>
