@@ -108,7 +108,7 @@
   <!-- Target: initialization
        All other targets should ultimately
        depend on this one (except perhaps very simple ones such as
-       "clean".
+       "clean" and "wipe".
   -->
   <target name="init" depends="ant-contrib,xmltask"
     description="Initialize the project">
@@ -354,7 +354,7 @@
   <!-- Target: clean
        Wipes any temporary files or directories
   -->
-  <target name="clean" description="Clean the project">
+  <target name="wipe" description="Wipes the project: deletes everything but sources">
     <delete>
       <fileset dir="." includes="**/*~"/>
     </delete>
@@ -362,6 +362,19 @@
     <delete dir="${build.bindir}"/>
     <delete dir="${build.docdir}"/>
     <delete dir="${build.depdir}"/>
+    <delete dir="${test.reportdir}"/>
+    <delete dir="${coverage.reportdir}"/>
+    <delete file="jacoco.exec"/>
+  </target>
+  
+  <!-- Target: clean
+       Deletes compiled files and test reports
+  -->
+  <target name="clean" description="Cleans compiled files and test reports">
+    <delete>
+      <fileset dir="." includes="**/*~"/>
+    </delete>
+    <delete dir="${build.bindir}"/>
     <delete dir="${test.reportdir}"/>
     <delete dir="${coverage.reportdir}"/>
     <delete file="jacoco.exec"/>

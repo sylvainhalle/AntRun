@@ -66,7 +66,7 @@ Otherwise, use one of the many [tasks](#tasks) that are predefined.
 Available tasks                                                    {#tasks}
 ---------------
 
-This document is incomplete. Execute
+In doubt, execute
 
     $ ant -p
 
@@ -78,7 +78,8 @@ The default task. Currently applies `jar`.
 
 ### compile
 
-Compiles the project.
+Compiles the project; checks and downloads dependencies, if any of them
+is not fulfilled.
 
 ### compile-tests
 
@@ -110,6 +111,15 @@ output JAR file of the `jar` task.
 
 Downloads the bootstrap classpath (`rt.jar`) for Java 6, and places it in
 the project's root folder. See [cross-compiling](#xcompile).
+
+### clean
+
+Deletes compiled files and test reports. The standard task to force a fresh
+recompilation of the sources.
+
+### wipe
+
+Deletes everything except source files.
 
 Continuous integration                                               {#ci}
 ----------------------
