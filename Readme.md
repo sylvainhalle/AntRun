@@ -52,8 +52,8 @@ Quick start guide                                             {#quickstart}
 
 5. Use Ant to build your project. To compile the code, generate the
    Javadoc, run the unit tests, generate a test and code coverage report
-   and bundle everything in a runnable JAR file, simply type `ant` (without
-   any arguments) on the command line.
+   and bundle everything in a runnable JAR file, simply type `ant all` on
+   the command line.
    
 6. If dependencies were specified in step 4 and are not present in the
    system, type `ant download-deps`, followed by `ant install-deps` to
@@ -120,16 +120,9 @@ like [Travis CI](https://travis-ci.org) or
 [Semaphore](http://semaphoreapp.com). The sequence of commands to
 automatically setup the environment, build and test it is (for Linux):
 
-    $ ant download-deps
-    $ ant dist test
+    $ ant
 
-The second command must be run as administrator, as it copies the required
-dependencies into a system folder that generally requires that access. For
-Windows systems, running as administrator is done with the
-[`runas` command](https://technet.microsoft.com/en-us/library/cc771525.aspx#BKMK_examples).
-
-Notice how, apart from the call to `sudo`, all the process is
-platform-independent.
+Notice how all the process is platform-independent.
 
 Declaring dependencies                                              {#deps}
 ----------------------
