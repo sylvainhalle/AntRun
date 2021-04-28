@@ -354,7 +354,7 @@
     </copy>
   </target>
   
-  <!-- Target: clean
+  <!-- Target: wipe
        Wipes any temporary files or directories
   -->
   <target name="wipe" description="Wipes the project: deletes everything but sources">
