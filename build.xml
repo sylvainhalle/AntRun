@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015-2020  Sylvain Hallé
+    Copyright (C) 2015-2021  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -485,7 +485,7 @@
   </condition>
   <target name="jacoco" if="${jacoco.absent}" description="Install JaCoCo if not present">
     <mkdir dir="${build.libdir}"/>
-    <get src="http://search.maven.org/remotecontent?filepath=org/jacoco/jacoco/0.8.5/jacoco-0.8.5.zip" dest="${build.libdir}/jacoco.zip"/>
+    <get src="http://search.maven.org/remotecontent?filepath=org/jacoco/jacoco/0.8.6/jacoco-0.8.6.zip" dest="${build.libdir}/jacoco.zip"/>
     <unzip src="${build.libdir}/jacoco.zip" dest="${build.libdir}">
       <patternset>
         <include name="**/*.jar"/>
