@@ -186,12 +186,14 @@ your computer. However, you can compile files that are compatible with
 a specific version of Java by putting the *bootstrap* JAR file `rt.jar`
 that corresponds to that version in the project's root folder (i.e. in the
 same folder as `build.xml`). When started, AntRun checks for the presence
-bootstrap JAR; if present, it uses it instead of the system's bootstrap
-classpath.
+of this bootstrap JAR; if present, it uses it instead of the system's
+bootstrap classpath.
 
 For example, if one downloads the `rt.jar` file from JDK 1.6 (using
 the `download-rt6` task), the compiled files will be able to be run by
-a Java 6 virtual machine. (Assuming the code itself is Java 6-compliant.)
+a Java 6 virtual machine. (Assuming the code itself is Java 6-compliant,
+and all JAR dependencies included in the code have also been compiled
+for 1.6.)
 
 Projects that use AntRun                                        {#projects}
 ------------------------
