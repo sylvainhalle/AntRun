@@ -8,6 +8,7 @@
 *.swp
 *.bak
 *.old
+\#*
 
 # MacOS !#@$ files
 .DS_Store
@@ -17,6 +18,7 @@
 **/lib/
 **/dep/
 **/test/
+**/tests/
 
 # Jars
 *.jar
@@ -65,4 +67,6 @@ report.xml
 # IDEA-specific
 .idea/
 *.iml
+
+# Others
 out/

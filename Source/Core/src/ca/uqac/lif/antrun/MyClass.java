@@ -1,6 +1,6 @@
 /*************************************************************************
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015  Sylvain Hallé
+    Copyright (C) 2015-2021  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +28,8 @@ public class MyClass
    */
   public static String myMethod(int x)
   {
-    Integer i = new Integer(x);
+    @SuppressWarnings("deprecation")
+		Integer i = new Integer(x);
     return i.toString();
   }
 }

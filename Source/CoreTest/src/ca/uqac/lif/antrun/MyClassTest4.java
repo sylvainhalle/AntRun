@@ -1,6 +1,6 @@
 /*************************************************************************
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015  Sylvain Hallé
+    Copyright (C) 2015-2021  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,16 +22,16 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * A simple main class used to test the build file
+ * A simple main class used to test the build file, using test written with
+ * JUnit version 4.
  */
-@SuppressWarnings("unused")
-public class MyClassTest
+public class MyClassTest4
 {
   
   @Test
   public void test1()
   {
-    MyClass mc = new MyClass();
-    String s = mc.myMethod(1);
+    String s = MyClass.myMethod(1);
+    assertEquals("1", s);
   }
 }

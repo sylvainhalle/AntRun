@@ -1,6 +1,6 @@
 /*************************************************************************
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015  Sylvain Hallé
+    Copyright (C) 2015-2021  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,8 @@ public class Main
    * The main method for the main class
    * @param args Any command-line arguments
    */
-  public static void main(String[] args)
+  @SuppressWarnings("unused")
+	public static void main(String[] args)
   {
     // Use another class to ensure the compilation worked
     MyClass mc = new MyClass();

@@ -1,6 +1,6 @@
 /*************************************************************************
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015  Sylvain Hallé
+    Copyright (C) 2015-2021  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -14,23 +14,24 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*************************************************************************/
+ *************************************************************************/
 package ca.uqac.lif.antrun;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
- * A simple main class used to test the build file
+ * A simple main class used to test the build file, using test written with
+ * JUnit version 5.
  */
-@SuppressWarnings("unused")
-public class MainTest
+@org.junit.Ignore // This to tell JUnit4 to ignore this file
+public class MyClassTest5
 {
-  
-  @Test
-  public void test1()
-  {
-    int i = 0;
-  }
+
+	@Test
+	public void test1()
+	{
+		String s = MyClass.myMethod(1);
+		assertEquals("1", s);
+	}
 }
