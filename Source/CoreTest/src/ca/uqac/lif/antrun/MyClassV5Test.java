@@ -14,24 +14,24 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*************************************************************************/
+ *************************************************************************/
 package ca.uqac.lif.antrun;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * A simple main class used to test the build file, using test written with
- * JUnit version 4.
+ * JUnit version 5.
  */
-public class MyClassTest4
+@org.junit.Ignore // This to tell JUnit4 to ignore this file
+public class MyClassV5Test
 {
-  
-  @Test
-  public void test1()
-  {
-    String s = MyClass.myMethod(1);
-    assertEquals("1", s);
-  }
+
+	@Test
+	public void test1()
+	{
+		String s = MyClass.myMethod(1);
+		assertEquals("1", s);
+	}
 }
