@@ -23,7 +23,7 @@
   xmlns:jacoco="antlib:org.jacoco.ant">
   
   <!-- The build script's version number. Do not edit! -->
-  <property name="antrun.version" value="1.7.1"/>
+  <property name="antrun.version" value="1.7.2"/>
   
   <!-- Load project properties from XML file -->
   <xmlproperty file="config.xml"/>
@@ -451,7 +451,10 @@
   <!-- Target: download-rt8
        Download boot classpath for Java 1.8 and put it in the root folder
   -->
-  <target name="download-rt8">
+  <condition property="rt8.absent" value="false" else="true">
+    <available file="${build.rtlocation}"/>
+  </condition>
+  <target name="download-rt8" if="${rt8.absent}">
     <get src="http://sylvainhalle.github.io/AntRun/dependencies/1.8.0_201/rt.jar" dest="${build.rtlocation}"/>
   </target>
   
