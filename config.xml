@@ -34,7 +34,10 @@
   
   <test>
     <!-- The filename pattern to recognize test files -->
-    <!-- <filenamepattern>**/*Test.java</filenamepattern> -->
+    <!-- <filenamepattern>
+           <src>**/*Test.java</src>
+           <bin>**/*Test.class</bin>
+         </filenamepattern> -->
   </test>
   
   <!--
