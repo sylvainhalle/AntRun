@@ -32,6 +32,9 @@
   <!-- The project's main class -->
   <!-- <mainclass>my.package.MainClass</mainclass> -->
   
+  <!-- The target JDK for which we are compiling -->
+  <!-- <targetjdk>8</targetjdk> -->
+  
   <test>
     <!-- The filename pattern to recognize test files -->
     <!-- <filenamepattern>

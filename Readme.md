@@ -31,7 +31,8 @@ Quick start guide                                             {#quickstart}
     tested on version 8 of the JDK, but it is probably safe to use
     any later version.
   - [Ant](http://ant.apache.org) to automate the compilation and build
-    process
+    process. For Debian-based systems, this corresponds to *two* packages:
+    `ant` and `ant-optional`.
 
 2. Download the AntRun template from
    [GitHub](https://github.com/sylvainhalle/AntRun) or clone the repository
@@ -79,7 +80,9 @@ is not fulfilled.
 
 ### compile-tests
 
-Compiles the unit tests.
+Compiles the unit tests. Tests can use either JUnit 4 or JUnit 5. They
+are run with JUnit 5 (with the "vintage" engine in the case of tests
+written for version 4).
 
 ### jar
 
@@ -90,9 +93,12 @@ dependencies, see `download-deps` below).
 ### test
 
 Performs tests with jUnit and generates code coverage report with JaCoCo.
-The unit test report (in HTML format) is available in the `test/junit`
+The unit test report (in HTML format) is available in the `tests/junit`
 folder (which will be created if it does not exist). The code coverage
-report is available in the `test/coverage` folder.
+report is available in the `tests/coverage` folder.
+
+A summary of the execution of the tests is also printed at the console.
+The format of this summary depends on the version of Ant
 
 ### download-deps
 
@@ -102,11 +108,6 @@ the `dep` or the `lib` folder. When compiling (with the `compile` task), the
 compiler is instructed to include these JARs in its classpath. Depending on the
 setting specified in `config.xml`, these JARs are also bundled in the
 output JAR file of the `jar` task.
-
-### download-rt8
-
-Downloads the bootstrap classpath (`rt.jar`) for Java 8, and places it in
-the project's root folder. See [cross-compiling](#xcompile).
 
 ### clean
 
@@ -180,17 +181,8 @@ with a version of Java earlier than the one used to compile it.
 
 By default, AntRun compiles your project using the default JDK installed on
 your computer. However, you can compile files that are compatible with
-a specific version of Java by putting the *bootstrap* JAR file `rt.jar`
-that corresponds to that version in the project's root folder (i.e. in the
-same folder as `build.xml`). When started, AntRun checks for the presence
-of this bootstrap JAR; if present, it uses it instead of the system's
-bootstrap classpath.
-
-For example, if one downloads the `rt.jar` file from JDK 1.8 (using
-the `download-rt8` task), the compiled files will be able to be run by
-a Java 6 virtual machine. (Assuming the code itself is Java 8-compliant,
-and all JAR dependencies included in the code have also been compiled
-for 1.8.)
+a specific version of Java by setting the `targetjdk` parameter to the
+a version of Java (e.g. 8 for Java 8) in `config.xml`.
 
 Projects that use AntRun                                        {#projects}
 ------------------------
