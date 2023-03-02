@@ -31,7 +31,7 @@
   </fail>
   
   <!-- The build script's version number. Do not edit! -->
-  <property name="antrun.version" value="1.9"/>
+  <property name="antrun.version" value="1.9a"/>
   
   <!-- Load project properties from XML file -->
   <xmlproperty file="config.xml"/>
@@ -78,10 +78,10 @@
   <property name="build.docdir" value="doc"/>
   
   <!-- The folder where the jUnit test reports should go -->
-  <property name="test.reportdir" value="tests/junit"/>
+  <property name="test.reportdir" value="${basedir}/tests/junit"/>
   
     <!-- The folder where the coverage test reports should go -->
-  <property name="coverage.reportdir" value="tests/coverage"/>
+  <property name="coverage.reportdir" value="${basedir}/tests/coverage"/>
   
   <!-- The project's main class. This is used for the generation of the
        runable JAR file in the "jar" target -->
