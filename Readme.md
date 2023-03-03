@@ -92,13 +92,23 @@ dependencies, see `download-deps` below).
 
 ### test
 
-Performs tests with jUnit and generates code coverage report with JaCoCo.
+Performs tests with jUnit. A summary of the execution of the tests is also
+printed at the console. The format of this summary depends on the version of
+Ant.
+
+### report
+
+Generates unit test and code coverage reports (with JaCoCo).
 The unit test report (in HTML format) is available in the `tests/junit`
 folder (which will be created if it does not exist). The code coverage
 report is available in the `tests/coverage` folder.
 
-A summary of the execution of the tests is also printed at the console.
-The format of this summary depends on the version of Ant
+Alternately, you can call `junit-report` and `jacoco-report` to perform
+these tasks individually.
+
+Note that this task requires that tests have first been run, but this must
+be done separately. It will fail if it does not find the files generated during
+the execution of the tests that are necessary to produce the reports.
 
 ### download-deps
 
@@ -108,6 +118,10 @@ the `dep` or the `lib` folder. When compiling (with the `compile` task), the
 compiler is instructed to include these JARs in its classpath. Depending on the
 setting specified in `config.xml`, these JARs are also bundled in the
 output JAR file of the `jar` task.
+
+### clean-reports
+
+Deletes test reports only.
 
 ### clean
 
@@ -128,6 +142,7 @@ like [Travis CI](https://travis-ci.org) or
 automatically setup the environment, build and test it is (for Linux):
 
     $ ant
+    $ ant test
 
 Notice how all the process is platform-independent.
 
@@ -208,7 +223,7 @@ an AntRun template project. This includes:
 - [TeXtidote](https://github.com/sylvainhalle/textidote), a spelling and
   grammar checker for LaTeX documents
 
-...and more.
+...and many more.
 
 About the author                                                   {#about}
 ----------------
