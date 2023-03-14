@@ -92,9 +92,16 @@ dependencies, see `download-deps` below).
 
 ### test
 
-Performs tests with jUnit. A summary of the execution of the tests is also
+Performs tests with JUnit. A summary of the execution of the tests is also
 printed at the console. The format of this summary depends on the version of
 Ant.
+
+### test-legacy
+
+Performs tests with JUnit. Performs tests with jUnit, but without using the
+`junitlauncher` task that is supported only in Ant 1.10.6 onwards. This results
+in less detailed reports. It is recommended to use only on versions of Ant
+prior to 1.10.6.
 
 ### report
 
