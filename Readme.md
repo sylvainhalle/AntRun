@@ -28,7 +28,7 @@ Quick start guide                                             {#quickstart}
 1. First make sure you have the following installed:
 
   - The Java Development Kit (JDK) to compile. AntRun was developed and
-    tested on version 8 of the JDK, but it is probably safe to use
+    tested on version 11 of the JDK, but it is probably safe to use
     any later version.
   - [Ant](http://ant.apache.org) to automate the compilation and build
     process. For Debian-based systems, this corresponds to *two* packages:
@@ -44,10 +44,11 @@ Quick start guide                                             {#quickstart}
    requires by editing `config.xml`. In particular, you may want
    to change the name of the Main class.
 
-4. Start writing your code in the `Source/Core` folder, and your unit
-   tests in `Source/CoreTest`. Optionally, you can create an Eclipse
-   workspace out of the `Source` folder, with `Core` and `CoreTest` as
-   two projects within this workspace.
+4. Start writing your code in the `src` folder, and your unit
+   tests in `srctest`. Optionally, you can create an Eclipse
+   workspace out of the `Source` folder, with the root directory
+   as a project. (Eclipse files can also be auto-generated, see
+   below.)
 
 5. Use Ant to build your project. To compile the code, generate the
    Javadoc, run the unit tests, generate a test and code coverage report
@@ -139,6 +140,15 @@ recompilation of the sources.
 
 Like `clean`, but also deletes all JAR dependencies.
 
+### eclipse
+
+Generates `.project` and `.classpath` files for this project. These files
+are used by [Eclipse](https://eclipse.org) to setup a project in a workspace.
+Select *Import*/*General*/*Existing projects into workspace* and select
+the projects folder. The project should show up with all its dependencies
+already set.
+
+
 Continuous integration                                               {#ci}
 ----------------------
 
@@ -191,6 +201,13 @@ The parameters are:
   said, both are in the classpath, but only the JARs in the `dep` folder are
   bundled when creating a JAR file for the project (using the `jar` task).
 
+In Eclipse, it is also possible to depend on another project. This can
+be specified using the `project` element, as follows:
+
+``` xml
+<project>Name of the project</project>
+```
+
 Cross-compiling                                                 {#xcompile}
 ---------------
 
@@ -209,7 +226,7 @@ a version of Java (e.g. 8 for Java 8) in `config.xml`.
 Projects that use AntRun                                        {#projects}
 ------------------------
 
-Virtually every Java project developed at [LIF](http://liflab.ca) uses
+Virtually every Java project developed at [LIF](https://liflab.github.io) uses
 an AntRun template project. This includes:
 
 - [Azrael](https://github.com/sylvainhalle/Azrael), a generic serialization
