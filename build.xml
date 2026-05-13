@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015-2025  Sylvain Hallé
+    Copyright (C) 2015-2026  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
   
   <!-- Versions of various dependencies -->
   <property name="versions.jacoco" value="0.8.14"/>
-  <property name="versions.junit" value="1.14.1"/>
+  <property name="versions.junit" value="1.14.4"/>
   
   <!--
     Default values. Note that Ant's properties cannot be overwritten once
@@ -222,7 +222,7 @@
   <!-- Target: javadoc
        Generates the javadoc associated to the project
   -->
-  <target name="javadoc" depends="init" description="Generate the documentation" depends="check-javadoc" unless="javadoc.uptodate">
+  <target name="javadoc" description="Generate the documentation" depends="init,check-javadoc" unless="javadoc.uptodate">
     <mkdir dir="${build.docdir}"/>
     <mkdir dir="${build.docdir}/doc-files"/>
     <javadoc sourcepath="${build.srcdir}"
